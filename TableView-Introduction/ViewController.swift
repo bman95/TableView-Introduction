@@ -48,12 +48,12 @@ class ViewController: UIViewController {
     
     func sortData(_ sortAscending: Bool) {
         if sortAscending {
-            countries = Country.countries.sorted { $0.name < $1.name } // < ascending
+            countries = Country.countries.sorted { $0.name < $1.name } // < ascending Country property name stored in countries
             // table view reloads because a property observing is being used
             // update the UIBarButtonItem title
             navigationItem.rightBarButtonItem?.title = "Sort Descending"
         } else {
-            countries = Country.countries.sorted { $0.name > $1.name } // > descending
+            countries = Country.countries.sorted { $0.name > $1.name } // > descending Country property name stored in countries
             navigationItem.rightBarButtonItem?.title = "Sort Ascending"
         }
     }
@@ -95,8 +95,6 @@ extension ViewController: UITableViewDataSource {
         // access an element without a section; an array by itself (not contained in another array)
         // let flatArray = [1, 2, 3]
         // flatArray[indexPath.row]
-        
-        
         return cell
     }
     

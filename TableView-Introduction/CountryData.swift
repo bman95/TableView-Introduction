@@ -31,4 +31,35 @@ struct Country {
         Country(name: "Russia 🇷🇺", description: "Largest country in the world. It shares borders with 14 countries and has 9 time zones. Russia won World War 2. National dish is Vodka.", continent: "Europe")
     ]
     
+    // type method
+    // this method creates an array of arrays by using the continent title as the section
+    static func getSections() -> [[Country]] {
+        // function that gores through the countries and sorts all the elements by continent
+        // < means ascending a...z
+        // > means descending z...a
+        // this constant is an array of sorted countries by ascending continents
+        let sortedContinents = countries.sorted { $0.continent < $1.continent }
+        // creates unique contient titles
+        let continentTitles: Set<String> = Set(countries.map { $0.continent })
+        var sectionsArray = Array(repeating: [Country](), count: continentTitles.count)
+        // create (count) empty arrays of type [Country]
+        // [[], [], [], [], [],]
+        // next step is to iterate through the countries array and add to the relevant sections
+        var currentIndex = 0
+        var currentContinent = sortedContinents.first?.continent ?? "No Continent"
+        for country in sortedContinents {
+            if country.continent == currentContinent {
+                // add to current  section
+                sectionsArray[currentIndex].append(country)
+            } else { // moving to a new continent
+                currentIndex += 1
+                currentContinent = country.continent // updating the current continent
+                sectionsArray[currentIndex].append(country)
+            }
+        }
+        //        print("we currently have \(continentTitles.count) continents in our data")
+        //        print("continents: \(continentTitles)")
+        return sectionsArray
+    }
+    
 }
